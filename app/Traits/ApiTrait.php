@@ -4,12 +4,12 @@ namespace App\Traits;
 use GrahamCampbell\ResultType\Success;
 
 trait ApiTrait{
-    public static function successMessage(string $message="",int $statusCode = 200)
+    public static function successMessage(string $message="",int $statusCode = 200,array $data = [])
     {
         return response()->json([
             'success'=>true,
             'message'=>$message,
-            'data'=>(object)[],
+            'data'=>(object)$data,
             'errors'=>(object)[]
         ],$statusCode);
     }

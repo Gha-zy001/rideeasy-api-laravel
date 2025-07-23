@@ -22,7 +22,7 @@ return new class extends Migration
           $table->string('vehicle_type')->nullable();
           $table->string('vehicle_registration_number')->nullable();
           $table->boolean('is_active')->default(false);
-          $table->string('status');
+          $table->string('status')->default('pending');
           $table->index('email');
           $table->index('license_number');
           $table->timestamps();
