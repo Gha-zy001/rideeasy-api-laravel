@@ -13,7 +13,7 @@ Route::get('/user', function (Request $request) {
 Route::prefix('v1/driver')->group(function () {
   Route::post('/register', [DriverRegisterController::class, 'register']);
   Route::post('/login', [DriverLoginController::class, 'login']);
-  Route::middleware('auth:driver')->group(function () {
+  Route::middleware(['auth:driver','check.token.expiry','throttle:60,1'])->group(function () {
     Route::post('/logout', [DriverLoginController::class, 'logout']);
   });
 });
