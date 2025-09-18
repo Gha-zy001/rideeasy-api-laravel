@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\Auth\DriverResetPasswordNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -30,10 +31,14 @@ class Driver extends Authenticatable
     'status',
   ];
   public function setPasswordAttribute($value)
-{
+  {
     $this->attributes['password'] = bcrypt($value);
-}
+  }
 
+  public function sendPasswordResetNotification($token)
+  {
+    $this->notify(new DriverResetPasswordNotification($token));
+  }
 
   protected $hidden = [
     'password',
@@ -42,6 +47,4 @@ class Driver extends Authenticatable
   protected $casts = [
     'is_active' => 'boolean',
   ];
-
-
 }

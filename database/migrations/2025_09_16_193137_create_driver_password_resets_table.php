@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('driver_password_resets', function (Blueprint $table) {
       $table->id();
       $table->string('email')->index();
-      $table->string('token');
+      $table->string('otp');
       $table->timestamps();
     });
   }
